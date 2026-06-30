@@ -1,9 +1,9 @@
 # YoloSegment-2D-to-3D-RebotARM
 
 <p align="center">
-  <video src="docs/img/video2.mp4" alt="Eye-in-hand pick-and-place on the reBot arm" height="300" autoplay loop muted playsinline></video>
+  <video src="https://github.com/danieldoradotalaveron-rb/YoloSegment-2D-to-3D-RebotARM_Pick_and_Place/raw/main/docs/img/video2.mp4" height="300" controls autoplay loop muted playsinline></video>
   &nbsp;
-  <video src="docs/img/video.mp4" alt="Realtime RGB-D 3D detection alongside 2D segmentation" height="300" autoplay loop muted playsinline></video>
+  <video src="https://github.com/danieldoradotalaveron-rb/YoloSegment-2D-to-3D-RebotARM_Pick_and_Place/raw/main/docs/img/video.mp4" height="300" controls autoplay loop muted playsinline></video>
 </p>
 
 An RGB-D tabletop perception and grasping pipeline. It captures RGB-D with an Intel
