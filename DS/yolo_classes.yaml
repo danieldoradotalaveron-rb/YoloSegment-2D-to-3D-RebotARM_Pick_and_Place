@@ -1,0 +1,11 @@
+# Canonical class list for the YOLO pipeline (single source of truth).
+#
+# The list ORDER defines the class id
+#
+#   - Append new classes at the end to keep existing ids stable
+#   - Reordering or removing entries CHANGES ids -> only do it if you retrain
+#   - Every label used in the LabelMe JSONs must appear here, or conversion fails
+classes:
+  - cork
+  - lighter
+  - pompom

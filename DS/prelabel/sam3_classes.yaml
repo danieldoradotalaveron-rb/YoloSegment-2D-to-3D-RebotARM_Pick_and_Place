@@ -1,0 +1,15 @@
+# Classes for the SAM3 pre-labeling pipeline (DS/prelabel).
+#
+# Single source of truth for the SAM3 backend: each entry defines one class.
+#   name   : output label written to the prelabel / LabelMe JSON
+#            (keep it equal to your YOLO class names so downstream stays consistent)
+#   prompt : text concept fed to SAM3 (what it searches for in the image);
+#            optional - defaults to `name` if omitted. Tune it freely without
+#            changing `name`, so the rest of the pipeline is unaffected.
+classes:
+  - name: cork
+    prompt: wine cork
+  - name: lighter
+    prompt: lighter
+  - name: pompom
+    prompt: pom pom ball

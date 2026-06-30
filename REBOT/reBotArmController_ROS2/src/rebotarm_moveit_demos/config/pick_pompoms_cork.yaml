@@ -1,0 +1,4 @@
+# Differences from common.yaml only (loaded after it).
+pick_pompoms_cork:
+  ros__parameters:
+    object_id: pick_object

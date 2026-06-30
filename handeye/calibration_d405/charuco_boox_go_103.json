@@ -1,0 +1,16 @@
+{
+  "dictionary": "5x5_100",
+  "squares_x": 8,
+  "squares_y": 6,
+  "square_length_m_nominal": 0.025,
+  "marker_length_m_nominal": 0.01875,
+  "square_px": 223,
+  "panel_px": [
+    1872,
+    1404
+  ],
+  "ppi": 227.0,
+  "square_length_m": 0.01802,
+  "marker_length_m": 0.01358,
+  "measured_note": "Measured on the BOOX Go 10.3 screen with a caliper. squareLength=mean(17.93,18.03,18.1)=18.02mm; markerLength=mean(13.62,13.5,13.61)=13.58mm. Ratio 0.754 (uniform scale, no distortion). USE square_length_m / marker_length_m for calibration."
+}

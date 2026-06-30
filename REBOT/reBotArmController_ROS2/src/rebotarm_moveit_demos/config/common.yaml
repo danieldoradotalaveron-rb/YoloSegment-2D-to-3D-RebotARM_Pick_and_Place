@@ -1,0 +1,95 @@
+# Parameters for the `pick_pompoms_cork` node (its launch loads this, then pick_pompoms_cork.yaml).
+# Grouped: robot/planning, perception, grasp geometry, auto mode, gripper, place.
+/**:
+  ros__parameters:
+    # --- Robot + MoveIt planning ---
+    group_name: arm
+    joint_names: [joint1, joint2, joint3, joint4, joint5, joint6]
+    planner_id: RRTConnect
+    pipeline_id: ompl
+    planning_time: 5.0
+    ik_timeout: 5.0
+    result_timeout: 30.0
+    joint_tolerance: 0.01
+    velocity_scaling: 1.0
+    acceleration_scaling: 0.8
+    object_frame_id: base_link
+    # Reachable grasp-ready seed point.
+    seed_point: [-0.0303, -1.8805, -1.1999, 0.0521, -0.0319, -0.0193]
+
+    # --- Perception ---
+    use_perception: true
+    perception_topic: /perception/detections
+    # A detection older than this (s), or an empty array, counts as "object not in view".
+    detection_timeout: 1.0
+    # Fallback target, used only when use_perception is false (manual test without perception).
+    target: [0.46, -0.01, 0.03]
+    object_class: cork
+    object_size: [0.03, 0.03, 0.05]
+
+    # --- Grasp geometry ---
+    # PREHOVER: far, high look pose aiming gripper_tcp so the camera sees the object un-occluded.
+    prehover_ik_link_name: gripper_tcp
+    prehover_quat_xyzw: [0.862, 0.036, -0.503, 0.045]
+    prehover_height: 0.20
+    prehover_seed: [0.0296, -1.8687, -1.7626, 0.9508, -0.0021, -0.0875]
+    prehover_xy_offset: [-0.10, 0.0]    # base-frame XY bias to keep the object in FOV (m)
+    # HOVER + DESCEND: aim grasp_tcp (the fingertip frame) so the tips center on the object.
+    ik_link_name: grasp_tcp
+    descend_ik_link_name: grasp_tcp
+    hover_quat_xyzw: [0.934, 0.006, -0.358, -0.003]   # measured, ~42 deg tilt (not vertical)
+    hover_height: 0.10
+    grasp_xy_offset: [0.0, 0.0]         # base-frame XY bias for the hover/descend target (m)
+    # joint6 is a free DOF for a symmetric top-down grasp: lock it to current so it does not spin.
+    lock_wrist_roll: true
+    # Rotate the grasp frame about base Z by the object's azimuth so the tilt stays radial (an
+    # off-center object is approached like a centered one). false = legacy fixed-base orientation.
+    azimuth_align: true
+    azimuth_ref_deg: 0.0                # azimuth (deg) the quaternions were measured at (+X = 0)
+    # DESCEND: straight drop of grasp_tcp from its hover height (read by TF), clamped above table.
+    descend_delta: 0.08                 # how far to lower grasp_tcp (m); raise until it grips
+    descend_pitch_deg: -10.0            # extra tilt about base Y during the drop (deg)
+    object_height: 0.01962              # real object height; locates the table plane from centroid
+    table_margin: 0.010                 # hard floor: grasp_tcp never goes below table_z + this (m)
+    grasp_descend_duration: 1.5         # descent time (s)
+    grasp_lift_duration: 0.8            # lift-back time (s)
+    replan_min_move: 0.005              # (manual) re-plan only if the centroid moved more (m)
+
+    # --- Auto mode ---
+    run_mode: auto                      # auto = no buttons; manual = step with Next/Continue/Stop
+    auto_loop: true                     # true = clear the whole scene; false = one object
+    auto_done_timeout: 3.0              # scan window before declaring the scene clear (s)
+    max_pick_attempts: 2                # tries per object before skipping it
+    safe_home_service: /rebotarm/safe_home
+    safe_home_timeout: 30.0
+
+    # --- Gripper ---
+    use_gripper: true
+    gripper_action_name: /gripper_controller/follow_joint_trajectory   # sim (trajectory)
+    hardware_gripper_action_name: /rebotarm/gripper/command            # hardware (GripperCommand)
+    gripper_joint_names: [gripper_joint1, gripper_joint2]
+    gripper_motion_duration: 1.0
+    gripper_max_effort: 10.0
+    # Sim widths (m), mapped to hardware angles via max_gripper_width.
+    max_gripper_width: 0.09
+    open_gripper_position: 0.045
+    closed_gripper_position: 0.0
+    grasp_gripper_to_object_width: true
+    gripper_grasp_padding: 0.002
+    # Hardware close angles (rad); more negative = more open. Grasp uses
+    # hardware_grasp_position_<class> if present, else hardware_grasp_position.
+    hardware_open_gripper_position: -3.0
+    hardware_closed_gripper_position: 0.0
+    hardware_grasp_position: -1.5
+    hardware_grasp_position_cork: -1.55
+    hardware_grasp_position_pompom: -0.6
+    attached_link_name: gripper_tcp
+    touch_links: [gripper_link, gripper_tcp, gripper_left, gripper_right, grasp_tcp]
+
+    # --- Place (drop at a fixed, joint-space config) ---
+    use_place: true
+    # 6 zeros = unset 
+    # falls back to place_joints).
+    place_joints: [-1.3597698, -0.4652090, -0.0719080, 0.0516901, 0.4110403, 0.1379032]
+    place_joints_cork: [-1.3597698, -0.4652090, -0.0719080, 0.0516901, 0.4110403, 0.1379032]
+    place_joints_pompom: [1.5630960, -0.7089720, -0.2618828, 0.1432438, -0.0074387, -0.0089645]

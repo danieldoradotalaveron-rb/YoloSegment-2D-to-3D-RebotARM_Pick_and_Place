@@ -1,0 +1,22 @@
+# Normalize line endings to LF for all text files
+* text=auto eol=lf
+
+# Keep batch scripts as CRLF (cmd.exe is sensitive to LF)
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# PowerShell handles LF fine; keep it LF like the rest
+*.ps1 text eol=lf
+*.ps1 text eol=crlf
+
+# Binary assets (never normalize)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pt binary
+*.engine binary
+*.onnx binary
+*.pth binary
+*.bag binary

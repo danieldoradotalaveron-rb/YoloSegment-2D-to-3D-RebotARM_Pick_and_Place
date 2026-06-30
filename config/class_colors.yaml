@@ -1,0 +1,10 @@
+# Display colors for detected classes in the realtime viewer (TabletopSeg3D).
+#
+# Viewer-only and fully optional: any class NOT listed here gets a stable
+# auto-generated color, so the runtime works for any class set out of the box.
+# Edit freely - keys are class names (must match your model labels), values are
+# RGB triplets in 0-255.
+colors:
+  cork: [255, 140, 50]
+  lighter: [50, 165, 255]
+  pompom: [200, 90, 255]

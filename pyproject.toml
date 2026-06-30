@@ -1,0 +1,52 @@
+[project]
+name = "yolosegment-2d-to-3d-rebotarm"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "labelme>=5.0.0",
+    "numpy==2.4.3",
+    "opencv-python==4.13.0.92",
+    "open3d==0.19.0",
+    "pyrealsense2==2.56.5.9235",
+    "torch==2.10.0+cu128",
+    "torchvision==0.25.0+cu128",
+    "ultralytics==8.4.71",
+]
+
+[project.optional-dependencies]
+# Optional SAM3 backend for the offline pre-labeling tooling (DS/prelabel). NOT
+# required by the runtime (TabletopSeg3D). SAM3 itself ships inside the already-pinned
+# `ultralytics`; this extra only adds `huggingface-hub` to fetch the gated
+# `sam3.pt` weights (https://huggingface.co/facebook/sam3). The CLIP text
+# encoder is auto-installed by ultralytics on first SAM3 run.
+#   uv sync --extra sam3
+sam3 = [
+    "huggingface-hub>=0.20",
+]
+# Optional 3DGS rasterization for Phase 1B synthetic views (render --backend gsplat).
+#   uv sync --extra 3dgs
+3dgs = [
+    "gsplat>=1.4.0",
+]
+# Optional experiment tracking: local MLflow logging of train runs (metrics, params,
+# artifacts) so successive trainings are comparable in one dashboard.
+#   uv sync --extra tracking   then   mlflow ui --backend-store-uri runs/mlflow
+tracking = [
+    "mlflow>=2.10",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128" },
+]
+torchvision = [
+    { index = "pytorch-cu128" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

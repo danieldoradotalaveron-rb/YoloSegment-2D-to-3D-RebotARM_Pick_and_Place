@@ -1,0 +1,72 @@
+# Defaults migrated from sense.ps1.
+# Keep here only values that are expected to change between runs.
+
+serial: 353322271636
+imgsz: 448
+conf: 0.7
+min_points: 50
+
+min_depth: 0.07
+max_depth: 0.60
+depth_filters: true
+depth_preset: high_density
+
+# Actionable 3D workspace (camera frame, meters): xmin,xmax,ymin,ymax,zmin,zmax.
+# Drawn as a box in the 3D viewer; points outside are dimmed and detections whose
+# center is outside are dropped from the JSON. Empty = whole scene is actionable.
+workspace: -0.28,0.27,0.02,0.20,0.29,0.60
+
+# Temporal tracker (3D pose smoothing + stability gate). The tracker links
+# detections across frames, filters the pose (median center/extent, circular-mean
+# yaw) and raises `stable` once the object is well-localized. Tune the gate here.
+# (Keep values bare: inline comments are NOT stripped by the config reader.)
+# track_window: frames kept per track (~0.7 s at 15 fps).
+track_window: 10
+# track_min_hits: detections in window required before `stable` can be true.
+track_min_hits: 6
+# track_max_misses: frames an object can be unseen before its track is dropped.
+track_max_misses: 5
+# track_max_pos_std: meters, max center jitter (std) allowed for `stable`.
+track_max_pos_std: 0.008
+# track_max_yaw_std: degrees, max yaw circular-std allowed for `stable`.
+track_max_yaw_std: 10.0
+# track_min_conf: min mean detection confidence for `stable`.
+track_min_conf: 0.8
+# track_assoc_dist: meters, same-class association gate (nearest-neighbor).
+track_assoc_dist: 0.04
+# Hysteresis + debounce for the `stable` flag (stops green<->amber flicker at the edge).
+# track_stable_enter_frames: consecutive frames meeting strict criteria before latching stable.
+track_stable_enter_frames: 3
+# track_stable_hysteresis: exit thresholds = enter thresholds * this (>1 = looser to leave stable).
+track_stable_hysteresis: 1.5
+# track_stable_conf_margin: leave stable when mean conf drops below (track_min_conf - this).
+track_stable_conf_margin: 0.05
+# We calculate yaw only for non-symmetric classes.
+non_symmetric_classes:
+# Symmetric classes are those that have no meaningful yaw.
+symmetric_classes: cork,pompom,lighter
+# Eye-in-hand: re-estimate the table plane normal every N frames so boxes stay flat on
+# the table as the arm moves. 1 = every frame (recommended for a moving camera),
+# 0 = freeze at warm-up (only valid for a static camera).
+table_normal_every: 1
+
+show_2d: false
+demo_visual: false
+point_stride: 0
+scene_max_points: 0
+
+view2d_size:
+view2d_pos:
+view2d_layout: rgb-only
+view2d_order: rgb-first
+view2d_fullscreen: false
+view2d_depth_min: 0.0
+view2d_depth_max: 0.0
+
+view3d_size:
+view3d_pos:
+# Start the Open3D viewer in raw lighting mode (simplified env, no IBL/skybox).
+raw_mode: true
+
+source:
+run:

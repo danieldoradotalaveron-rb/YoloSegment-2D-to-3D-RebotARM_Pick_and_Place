@@ -1,0 +1,17 @@
+Panels:
+  - Class: rviz_common/Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Grid
+    - Class: rviz_default_plugins/RobotModel
+      Description Topic:
+        Value: /robot_description
+      Enabled: true
+      Name: RobotModel
+  Enabled: true
+  Global Options:
+    Fixed Frame: base_link
+  Name: root

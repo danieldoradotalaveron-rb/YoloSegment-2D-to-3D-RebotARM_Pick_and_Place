@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="reBot_B601_DM_with_gripper">
+  <xacro:arg name="initial_positions_file" default="$(find rebotarm_moveit_config)/config/initial_positions.yaml"/>
+
+  <xacro:include filename="$(find rebotarm_bringup)/description/urdf/reBot_B601_DM_with_gripper.urdf"/>
+  <xacro:include filename="$(find rebotarm_moveit_config)/config/rebotarm.ros2_control.xacro"/>
+
+  <link name="gripper_tcp"/>
+  <joint name="gripper_tcp_joint" type="fixed">
+    <origin xyz="-0.0443 0 0" rpy="0 0 0"/>
+    <parent link="gripper_link"/>
+    <child link="gripper_tcp"/>
+  </joint>
+
+  <!-- Grasp point: center between the closed fingertips, on the gripper approach axis.
+       Measured from the gripper_left/right STLs (transformed into gripper_link): the finger
+       free end (gripping tip) reaches X = 0 in gripper_link, while -X points toward the
+       finger root and motor body. So the fingertips coincide with gripper_link's origin;
+       grasp_tcp sits there (offset 0). Same orientation as gripper_link (rpy 0). -->
+  <link name="grasp_tcp"/>
+  <joint name="grasp_tcp_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="gripper_link"/>
+    <child link="grasp_tcp"/>
+  </joint>
+
+  <!-- Hand-eye reference frame. Identical to end_joint/end_link in the calibration URDF
+       (reBot-DevArm_fixend.urdf) so ee_T_cam (calibrated vs end_link) is usable here
+       without recalibrating. link6 is the shared flange in both URDFs. -->
+  <link name="end_link"/>
+  <joint name="end_joint" type="fixed">
+    <origin xyz="0 0 0.15539" rpy="0 -1.5708 3.1415"/>
+    <parent link="link6"/>
+    <child link="end_link"/>
+  </joint>
+
+  <xacro:rebotarm_ros2_control name="RebotArmMockSystem" initial_positions_file="$(arg initial_positions_file)"/>
+</robot>

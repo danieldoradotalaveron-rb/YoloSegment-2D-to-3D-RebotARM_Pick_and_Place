@@ -1,0 +1,89 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Marker (grasp_tcp)1
+      Splitter Ratio: 0.5
+  - Class: rviz_common/Views
+    Name: Views
+
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: base_link
+    Frame Rate: 30
+  Name: root
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 0.1
+      Plane Cell Count: 20
+      Color: 160; 160; 164
+      Reference Frame: <Fixed Frame>
+
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Visual Enabled: true
+      Collision Enabled: false
+      Alpha: 1
+
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Show Names: true
+      Show Axes: true
+      Show Arrows: false
+      Marker Scale: 0.05
+      Frame Timeout: 15
+      Update Interval: 0
+
+    - Class: rviz_default_plugins/Marker
+      Name: Marker (grasp_tcp)
+      Enabled: true
+      Namespaces: {}
+      Topic:
+        Value: /visualization_marker
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Distance: 1.4
+      Focal Point:
+        X: 0.35
+        Y: 0.0
+        Z: 0.1
+      Pitch: 0.45
+      Yaw: 0.9
+      Target Frame: base_link
+    Saved: ~
+
+Window Geometry:
+  Displays:
+    collapsed: false
+  Views:
+    collapsed: false
+  Height: 900
+  Width: 1400
