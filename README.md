@@ -12,8 +12,8 @@ lifts the masks to 3D (point cloud + tabletop-aligned oriented bounding box),
 estimates each object's pose in the robot base frame, and feeds those detections to
 a ROS 2 / MoveIt pick-and-place node running on a reBot arm.
 
-Status: work in progress. The example dataset uses the classes `cork`, `lighter`
-and `pompom`, and the pick node is set up for `cork` and `pompom`.
+The example dataset uses the classes `cork`, `lighter` and `pompom`, and the pick
+node is set up for `cork` and `pompom`.
 
 ## Pipeline overview
 
