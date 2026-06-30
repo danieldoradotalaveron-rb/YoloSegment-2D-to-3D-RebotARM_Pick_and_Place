@@ -1,9 +1,9 @@
 # YoloSegment-2D-to-3D-RebotARM
 
 <p align="center">
-  <video src="https://github.com/danieldoradotalaveron-rb/YoloSegment-2D-to-3D-RebotARM_Pick_and_Place/raw/main/docs/img/video2.mp4" height="300" controls autoplay loop muted playsinline></video>
+  <img src="docs/img/video2.gif" height="300" alt="Pick-and-place demo">
   &nbsp;
-  <video src="https://github.com/danieldoradotalaveron-rb/YoloSegment-2D-to-3D-RebotARM_Pick_and_Place/raw/main/docs/img/video.mp4" height="300" controls autoplay loop muted playsinline></video>
+  <img src="docs/img/video.gif" height="300" alt="Perception and segmentation demo">
 </p>
 
 An RGB-D tabletop perception and grasping pipeline. It captures RGB-D with an Intel

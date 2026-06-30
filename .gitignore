@@ -63,8 +63,9 @@ NOTES.md
 # spike outputs are large binaries). Not part of the runtime; keep out of the repo.
 external/
 
-# Hugging Face staging (model card already published; kept locally, out of git).
+# Hugging Face staging (cards/media for the HF model & dataset repos; kept local).
 hf_model/
+hf_dataset/
 
 # Dataset images are hosted on Hugging Face (see README), not shipped in git.
 # Files stay on disk so the local pipeline keeps working.
